@@ -13,19 +13,21 @@ export default function PokemonApp() {
   // Fonction de fetch
   const fetchPokemons = async () => {
     setLoading(true);
-    const newPokemons: any[] = [];
-    for (let i = 1; i <= pokemonToDisplay; i++) {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
-      const data = await response.json();
-      newPokemons.push({
-        id: i,
-        name: data.name,
-        type: data.types[0].type.name,
-        weight: data.weight,
-      });
-    }
-    setPokemonList(newPokemons);
-    setLoading(false);
+    setTimeout(async () => {
+      const newPokemons: any[] = [];
+      for (let i = 1; i <= pokemonToDisplay; i++) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+        const data = await response.json();
+        newPokemons.push({
+          id: i,
+          name: data.name,
+          type: data.types[0].type.name,
+          weight: data.weight,
+        });
+      }
+      setPokemonList(newPokemons);
+      setLoading(false);
+    }, 500);
   };
 
   // Fetch au montage + à chaque changement du nombre à afficher
