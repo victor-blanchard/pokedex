@@ -213,11 +213,6 @@
   width: 80%;
 }
 
-.pokemon:hover .type {
-  background: rgba(52, 152, 219, 0.2);
-  transform: scale(1.05);
-}
-
 .nextButton {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
@@ -260,156 +255,77 @@
   transform: translateY(-1px) scale(1.02);
 }
 
-.fire {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  background-image: url("/fire.jpg");
+.backgroundType {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: white;
+}
+.fire {
+  background-image: url("/fire.jpg");
 }
 
 .grass {
-  background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
   background-image: url("/grass.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .electric {
-  background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
   background-image: url("/electric.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #2c3e50;
 }
 
 .water {
-  background: linear-gradient(135deg, #74c0fc 0%, #339af0 100%);
   background-image: url("/water.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 .ice {
-  background: linear-gradient(135deg, #74c0fc 0%, #339af0 100%);
   background-image: url("/water.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .ground {
-  background: linear-gradient(135deg, #fd7e14 0%, #e8590c 100%);
   background-image: url("/ground.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .rock {
-  background: linear-gradient(135deg, #868e96 0%, #6c757d 100%);
   background-image: url("/rock.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .steel {
-  background: linear-gradient(135deg, #868e96 0%, #6c757d 100%);
   background-image: url("/rock.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .dark {
-  background: linear-gradient(135deg, #868e96 0%, #6c757d 100%);
   background-image: url("/rock.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .fairy {
-  background: linear-gradient(135deg, #f783ac 0%, #e64980 100%);
   background-image: url("/psychic.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .poison {
-  background: linear-gradient(135deg, #9775fa 0%, #845ef7 100%);
   background-image: url("/poison.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .bug {
-  background: linear-gradient(135deg, #69db7c 0%, #51cf66 100%);
   background-image: url("/grass.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .dragon {
-  background: linear-gradient(135deg, #74c0fc 0%, #339af0 100%);
   background-image: url("/dragon.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .psychic {
-  background: linear-gradient(135deg, #ff8cc8 0%, #f06595 100%);
   background-image: url("/psychic.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .flying {
-  background: linear-gradient(135deg, #a5d8ff 0%, #74c0fc 100%);
   background-image: url("/dragon.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #2c3e50;
 }
 
 .fighting {
-  background: linear-gradient(135deg, #ff8787 0%, #ff6b6b 100%);
   background-image: url("/fighting.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
 }
 
 .ghost {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   background-image: url("/normal.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #2c3e50;
 }
 
 .normal {

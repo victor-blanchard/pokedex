@@ -68,7 +68,10 @@ export default function PokemonApp() {
       )}
       <div className={styles.pokemonContainer}>
         {pokemonList.map((pokemon) => (
-          <div key={pokemon.id} className={`${styles.pokemon} ${styles[pokemon.type]}`}>
+          <div
+            key={pokemon.id}
+            className={`${styles.pokemon} ${styles[pokemon.type]} ${styles.backgroundType} `}
+          >
             <div className={styles.imgContainer}>
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`}
