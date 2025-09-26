@@ -85,7 +85,7 @@ export default function PokemonApp() {
                 Type: <span>{pokemon.type}</span>
               </span>
               <span className={styles.weight}>
-                Weight: <span>{pokemon.weight} kg</span>
+                Weight: <span>{pokemon.weight / 10} kg</span>
               </span>
             </div>
           </div>
