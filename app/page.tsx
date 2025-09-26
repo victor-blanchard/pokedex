@@ -6,7 +6,7 @@ import { Button } from "antd";
 
 export default function PokemonApp() {
   let [pokemonList, setPokemonList] = useState<any[]>([]);
-  let [pokemonToDisplay, setPokemonToDisplay] = useState<number>(20);
+  let [pokemonToDisplay, setPokemonToDisplay] = useState<number>(15);
   let [loading, setLoading] = useState<boolean>(false);
   let [isLogoClicked, setIsLogoClicked] = useState<boolean>(false);
 
@@ -40,7 +40,7 @@ export default function PokemonApp() {
   };
 
   const handleClickNext = () => {
-    setPokemonToDisplay(pokemonToDisplay + 20);
+    setPokemonToDisplay(pokemonToDisplay + 15);
   };
 
   const handleClickAboutMe = () => {
