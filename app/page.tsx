@@ -98,7 +98,7 @@ export default function PokemonApp() {
           handleClickNext();
         }}
       >
-        {loading ? "Loading..." : "Next 20 pokemons"}
+        {loading ? "Loading..." : "Next 15 pokemons"}
       </Button>
       <div className={styles.aboutMeContainer}>
         <Button className={styles.aboutMeButton} onClick={handleClickAboutMe}>
