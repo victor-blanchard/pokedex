@@ -1,95 +1,107 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
+import React, { useEffect, useState } from "react";
+import { Button } from "antd";
 
-export default function Home() {
+export default function PokemonApp() {
+  let [pokemonList, setPokemonList] = useState<any[]>([]);
+  let [pokemonToDisplay, setPokemonToDisplay] = useState<number>(20);
+  let [loading, setLoading] = useState<boolean>(false);
+  let [isLogoClicked, setIsLogoClicked] = useState<boolean>(false);
+
+  // Fonction de fetch
+  const fetchPokemons = async () => {
+    setLoading(true);
+    setTimeout(async () => {
+      const newPokemons: any[] = [];
+      for (let i = 1; i <= pokemonToDisplay; i++) {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+        const data = await response.json();
+        newPokemons.push({
+          id: i,
+          name: data.name,
+          type: data.types[0].type.name,
+          weight: data.weight,
+        });
+      }
+      setPokemonList(newPokemons);
+      setLoading(false);
+    }, 1000);
+  };
+
+  // Fetch au montage + à chaque changement du nombre à afficher
+  useEffect(() => {
+    fetchPokemons();
+  }, [pokemonToDisplay]);
+
+  const handleClickLogo = () => {
+    setIsLogoClicked(!isLogoClicked);
+  };
+
+  const handleClickNext = () => {
+    setPokemonToDisplay(pokemonToDisplay + 20);
+  };
+
+  const handleClickAboutMe = () => {
+    window.location.href = "https://linktr.ee/victorblanchard";
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className={styles.main}>
+      <div className={styles.logo}>
+        <img
+          src="/Pokemon_logo.svg"
+          alt="logo"
+          onClick={() => {
+            handleClickLogo();
+          }}
         />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      </div>
+      {isLogoClicked && (
+        <div className={styles.logoText}>
+          <h1>
+            Bienvenue dans le monde Pokémon ! Ce projet à pour objectif de consommer l'API de
+            PokéAPI pour afficher les Pokémons. Bonne visite !
+          </h1>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      )}
+      <div className={styles.pokemonContainer}>
+        {pokemonList.map((pokemon) => (
+          <div key={pokemon.id} className={`${styles.pokemon} ${styles[pokemon.type]}`}>
+            <div className={styles.imgContainer}>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`}
+                alt={pokemon.name}
+              />
+            </div>
+            <div className={styles.info}>
+              <h3 className={styles.name}>{pokemon.name}</h3>
+              <h3 className={styles.number}># {pokemon.id}</h3>
+              <span className={styles.type}>
+                Type: <span>{pokemon.type}</span>
+              </span>
+              <span className={styles.weight}>
+                Weight: <span>{pokemon.weight} kg</span>
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Button
+        className={styles.nextButton}
+        loading={loading}
+        onClick={() => {
+          handleClickNext();
+        }}
+      >
+        {loading ? "Loading..." : "Next 20 pokemons"}
+      </Button>
+      <div className={styles.aboutMeContainer}>
+        <Button className={styles.aboutMeButton} onClick={handleClickAboutMe}>
+          About me
+        </Button>
+      </div>
     </div>
   );
 }

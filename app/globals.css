@@ -1,13 +1,16 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Variables CSS pour le Pokédex */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --pokemon-gradient: linear-gradient(135deg, #4facfe2c 0%, #2577be59 100%);
+  --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+  --shadow-medium: 0 15px 35px rgba(31, 38, 135, 0.2);
+  --shadow-heavy: 0 20px 40px rgba(31, 38, 135, 0.3);
+  --border-radius: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html,
@@ -33,10 +36,4 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }

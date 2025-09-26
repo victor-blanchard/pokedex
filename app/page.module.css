@@ -1,167 +1,447 @@
-.page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap");
 
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
+/* Conteneur principal de l'application */
+.main {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--primary-gradient);
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
+  font-family: "Poppins", sans-serif;
+  padding: 20px;
+  position: relative;
+  overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-10px) rotate(-1deg);
   }
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+/* Logo et header */
+.logo {
+  padding: 20px;
+  margin-bottom: 30px;
+  /* position: relative; */
+  z-index: 2;
 }
 
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
+.logo img {
+  max-width: 300px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  transition: var(--transition);
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+}
+
+.logoText {
+  width: 70%;
+  font-size: 0.6rem;
+  color: #ffc802e4;
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #445f7b70;
+  padding: 10px;
+  border-radius: 10px;
+}
+/* Conteneur des Pokémon */
+.pokemonContainer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 30px;
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  z-index: 1;
+}
+
+/* Carte individuelle de Pokémon */
+.pokemon {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
   margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
-}
-
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
-}
-
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
-}
-
-.ctas {
-  display: flex;
-  gap: 16px;
-}
-
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  padding: 25px 20px;
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 6px solid #ffc802e4;
+  height: 23rem;
+  width: 15rem;
+}
+
+.pokemon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.pokemon:hover::before {
+  left: 100%;
+}
+
+.pokemon:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-heavy);
+}
+
+/* Conteneur d'image amélioré */
+.imgContainer {
+  background: var(--pokemon-gradient);
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
+  position: relative;
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
+}
+
+.imgContainer::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 1;
+}
+
+.imgContainer img {
+  max-width: 85%;
+  max-height: 85%;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+  transition: var(--transition);
+  z-index: 2;
+  position: relative;
+}
+
+.pokemon:hover .imgContainer {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.pokemon:hover .imgContainer img {
+  transform: scale(1.1);
+  filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.4));
+}
+
+/* Informations du Pokémon */
+.info {
+  margin-top: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.name {
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.number {
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #ffffff;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.type {
+  display: inline-block;
+  background: rgba(52, 152, 219, 0.1);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
   font-weight: 500;
+  margin-top: 10px;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+  width: 80%;
+}
+.weight {
+  display: inline-block;
+  background: rgba(52, 152, 219, 0.1);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 10px;
+
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+  width: 80%;
 }
 
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
+.pokemon:hover .type {
+  background: rgba(52, 152, 219, 0.2);
+  transform: scale(1.05);
 }
 
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 158px;
+.nextButton {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  background: var(--secondary-gradient);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 30px;
+  margin: 30px 0;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
 }
 
-.footer {
-  grid-row-start: 3;
+.nextButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.nextButton:hover::before {
+  left: 100%;
+}
+
+.nextButton:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-medium);
+}
+
+.nextButton:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.fire {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  background-image: url("/fire.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.grass {
+  background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+  background-image: url("/grass.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.electric {
+  background: linear-gradient(135deg, #ffd43b 0%, #fab005 100%);
+  background-image: url("/electric.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #2c3e50;
+}
+
+.water {
+  background: linear-gradient(135deg, #74c0fc 0%, #339af0 100%);
+  background-image: url("/water.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+.ice {
+  background: linear-gradient(135deg, #74c0fc 0%, #339af0 100%);
+  background-image: url("/water.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.ground {
+  background: linear-gradient(135deg, #fd7e14 0%, #e8590c 100%);
+  background-image: url("/ground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.rock {
+  background: linear-gradient(135deg, #868e96 0%, #6c757d 100%);
+  background-image: url("/rock.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.steel {
+  background: linear-gradient(135deg, #868e96 0%, #6c757d 100%);
+  background-image: url("/rock.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.dark {
+  background: linear-gradient(135deg, #868e96 0%, #6c757d 100%);
+  background-image: url("/rock.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.fairy {
+  background: linear-gradient(135deg, #f783ac 0%, #e64980 100%);
+  background-image: url("/psychic.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.poison {
+  background: linear-gradient(135deg, #9775fa 0%, #845ef7 100%);
+  background-image: url("/poison.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.bug {
+  background: linear-gradient(135deg, #69db7c 0%, #51cf66 100%);
+  background-image: url("/grass.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.dragon {
+  background: linear-gradient(135deg, #74c0fc 0%, #339af0 100%);
+  background-image: url("/dragon.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.psychic {
+  background: linear-gradient(135deg, #ff8cc8 0%, #f06595 100%);
+  background-image: url("/psychic.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.flying {
+  background: linear-gradient(135deg, #a5d8ff 0%, #74c0fc 100%);
+  background-image: url("/dragon.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #2c3e50;
+}
+
+.fighting {
+  background: linear-gradient(135deg, #ff8787 0%, #ff6b6b 100%);
+  background-image: url("/fighting.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.ghost {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background-image: url("/normal.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #2c3e50;
+}
+
+.normal {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background-image: url("/normal.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #2c3e50;
+}
+
+.pokemon {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.aboutMeContainer {
   display: flex;
-  gap: 24px;
-}
-
-.footer a {
-  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
-  gap: 8px;
+  width: 100%;
 }
 
-.footer img {
-  flex-shrink: 0;
+.aboutMeButton {
+  background: var(--secondary-gradient);
+  border-radius: 10px;
+  padding: 10px;
+  color: rgb(253, 253, 253);
+  font-weight: 600;
+  border: none;
 }
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-}
-
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
-  }
-
-  .main {
-    align-items: center;
-  }
-
-  .main ol {
-    text-align: center;
-  }
-
-  .ctas {
-    flex-direction: column;
-  }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
-  }
-
-  a.secondary {
-    min-width: auto;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
+.aboutMeButton:hover {
+  transform: translateY(-3px) scale(1);
+  box-shadow: var(--shadow-medium);
 }
